@@ -11,6 +11,7 @@ def is_sorted(items):
         if items[i] < items[i-1]:
             return False
     return True
+    # [9, 7, 4, 1, 2]
 
 # print("is it sorted: ", is_sorted([1, 2, 4, 7, 9]))
 
@@ -69,13 +70,15 @@ def selection_sort(items):
 def insertion_sort(items):
     """Sort given items by taking first unsorted item, inserting it in sorted
     order in front of items, and repeating until all items are in order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    TODO: Running time: O(n)^2 Why and under what conditions? we have two loops
+    that keeps track of where we are in the loop and anothor loop to compare and shift
+    TODO: Memory usage: 4*O(1)~O(1) Why and under what conditions? we are allocating
+    memory for key and j"""
     # TODO: Repeat until all items are in sorted order
     # TODO: Take first unsorted item
     # TODO: Insert it in sorted order in front of items
     for i in range(len(items)):
-        key = items[i] 
+        key = items[i]
         j=i-1
         while j>=0 and key<items[j]:
             items[j+1]=items[j]
