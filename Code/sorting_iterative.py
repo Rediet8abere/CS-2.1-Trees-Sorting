@@ -64,7 +64,7 @@ def selection_sort(items):
     print("items", items, count)
 
 # [1, 7, 4, 9, 2]
-selection_sort([9, 7, 4, 1, 2])
+# selection_sort([9, 7, 4, 1, 2])
 
 def insertion_sort(items):
     """Sort given items by taking first unsorted item, inserting it in sorted
@@ -74,18 +74,14 @@ def insertion_sort(items):
     # TODO: Repeat until all items are in sorted order
     # TODO: Take first unsorted item
     # TODO: Insert it in sorted order in front of items
-    # i = 2
-    # j = 0
     for i in range(len(items)):
-        # j = i-1
-        for j in range(i):
-            if items[i] < items[j]:
-                temp = items[i]
-                items[i] = items[j]
-                items[j] = temp
-    # [7, 9, 4, 1, 2]
-    # [4, 9, 7, 1, 2]
-    # []
-    print("items", items)
+        key = items[i] 
+        j=i-1
+        while j>=0 and key<items[j]:
+            items[j+1]=items[j]
+            j-=1
+        items[j+1]=key
+
+    print("items: ", items)
 
 insertion_sort([9, 7, 4, 1, 2])
