@@ -18,15 +18,18 @@ def is_sorted(items):
 def bubble_sort(items):
     """Sort given items by swapping adjacent items that are out of order, and
     repeating until all items are in sorted order.
-    TODO: Running time: O(n)^2 Why and under what conditions? we have 2 for loops
-    that iterates through the given list and swap every item unitl every element in
-    the loop is sorted
+    TODO: Running time: WORST CASE: O(n)^2 Why and under what conditions? we have 2
+    for loops that iterates through the given list and swap every item unitl every
+    element in the loop is sorted
+    BEST CASE: O(n) If we get an almost sorted list then we would have to loop atleast
+    n times and get out early.
     TODO: Memory usage: O(1) Why and under what conditions? the only memory we need
     to allocate is for temp"""
     # to keep track of iteration not useful for the algorithm itself
     count = 0
     n = len(items)
     # to get out early if the items are sorted
+    # checks if there is a swap
     sorted = False
     while not sorted:
         sorted = True
@@ -44,8 +47,8 @@ def bubble_sort(items):
 def selection_sort(items):
     """Sort given items by finding minimum item, swapping it with first
     unsorted item, and repeating until all items are in sorted order.
-    TODO: Running time: O(n)^2 Why and under what conditions? we have to loop
-    through the items twice to to compare and rearrange item
+    TODO: Running time: WORST CASE & BEST CASE: O(n)^2 Why and under what conditions?
+    we have to loop through the items twice to compare and rearrange item
     TODO: Memory usage: O(1) Why and under what conditions? we are allocating memory
     for only temp"""
     # to keep track of iteration not useful for the algorithm itself
@@ -64,19 +67,18 @@ def selection_sort(items):
 
     print("items", items, count)
 
-# [1, 7, 4, 9, 2]
-# selection_sort([9, 7, 4, 1, 2])
+
 
 def insertion_sort(items):
     """Sort given items by taking first unsorted item, inserting it in sorted
     order in front of items, and repeating until all items are in order.
-    TODO: Running time: O(n)^2 Why and under what conditions? we have two loops
-    that keeps track of where we are in the loop and anothor loop to compare and shift
+    TODO: Running time: WORST CASE: O(n)^2 Why and under what conditions? we have two loops
+    that keeps track of where we are in the loop and anothor loop to compare and shift.
+    BEST CASE: O(n) same as bubble sort if we get an almost sorted list then we can get
+    out early.
     TODO: Memory usage: 4*O(1)~O(1) Why and under what conditions? we are allocating
     memory for key and j"""
-    # TODO: Repeat until all items are in sorted order
-    # TODO: Take first unsorted item
-    # TODO: Insert it in sorted order in front of items
+
     for i in range(len(items)):
         key = items[i]
         j=i-1
