@@ -9,7 +9,23 @@ def merge(items1, items2):
     # TODO: Repeat until one list is empty
     # TODO: Find minimum item in both lists and append it to new list
     # TODO: Append remaining items in non-empty list to new list
+    left = 0
+    right = 0
+    merged = []
+    while left!=len(items1) and right!=len(items2):
+        if items1[left] < items2[right]:
+            merged.append(items1[left])
+            left+=1
+        else:
+            merged.append(items2[right])
+            right+=1
+    if left<len(items1):
+        merged.extend(items1[left:])
+    if right<len(items2):
+        merged.extend(items2[right:])
+    return merged
 
+print(merge([2, 5, 6, 9], [1, 3, 5, 8, 10]))
 
 def split_sort_merge(items):
     """Sort given items by splitting list into two approximately equal halves,
