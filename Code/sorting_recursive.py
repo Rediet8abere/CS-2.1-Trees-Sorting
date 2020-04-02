@@ -4,11 +4,11 @@
 def merge(items1, items2):
     """Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until one list is empty
-    # TODO: Find minimum item in both lists and append it to new list
-    # TODO: Append remaining items in non-empty list to new list
+    TODO: Running time: WORST CASE: O(n) Why and under what conditions? we have to iterate
+    through item1 and item2 and check if item from item1 is less than item in item2
+    TODO: Memory usage: O(n) Why and under what conditions? we allocate memory for array to
+    store the sorted list"""
+    
     left = 0
     right = 0
     merged = []
