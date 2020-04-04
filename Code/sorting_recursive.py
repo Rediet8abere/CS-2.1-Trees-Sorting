@@ -1,27 +1,34 @@
 # #!python
 
 
-def merge(items1, items2):
+def merge(items1, items2, items):
     """Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
     TODO: Running time: O(n) Why and under what conditions? we have to iterate
     through item1 and item2 and check if item from item1 is less than item in item2
     TODO: Memory usage: O(n) Why and under what conditions? we allocate memory for array to
     store the sorted list"""
-    merged = []
-    left = 0
-    right = 0
+    index = 0
+    left, right = 0, 0
     while left < len(items1) and right < len(items2):
         if items1[left] < items2[right]:
-            merged.append(items1[left])
+            items[index] = items1[left]
             left+=1
         else:
-            merged.append(items2[right])
+            items[index] = items2[right]
             right+=1
-    merged += items1[left:]
-    merged += items2[right:]
+        index += 1
+    # if right is done first
+    for item in items1[left:]:
+        items[index] = item
+        index += 1
+    # if left is done first
+    for item in items2[right:]:
+        items[index] = item
+        index += 1
 
-    return merged
+
+    return items
 
 
 def split_sort_merge(items):
@@ -37,7 +44,7 @@ def split_sort_merge(items):
     items2 = merge_sort(items[mid:])
 
 
-    return merge(items1, items2)
+    return merge(items1, items2, items)
 
 
 
