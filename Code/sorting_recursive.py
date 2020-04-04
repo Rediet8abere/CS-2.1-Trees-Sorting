@@ -1,13 +1,18 @@
 # #!python
 
-
 def merge(items1, items2, items):
     """Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
-    TODO: Running time: O(n) Why and under what conditions? we have to iterate
-    through item1 and item2 and check if item from item1 is less than item in item2
-    TODO: Memory usage: O(n) Why and under what conditions? we allocate memory for array to
-    store the sorted list"""
+
+    Running time: This function is being called recursively and the number of
+    times it will be executed is log(n) because we have to split the function log(n)
+    times to get to the base case which is 1. After doing so, we need to perform n
+    append operation to merge back the items after comparing them. Therefore, the time
+    complexity of our function is n*log(n). Adding on that one of for loop runs if either
+    items1 or items2 gets done first making the time complexity 2n*log(n) ~ n*log(n)
+
+    Memory usage: no memory usage Why and under what conditions? we are not allocating
+    memory instead we are rearranging what's in items"""
     index = 0
     left, right = 0, 0
     while left < len(items1) and right < len(items2):
@@ -35,9 +40,11 @@ def split_sort_merge(items):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each with an iterative sorting algorithm, and merging results into
     a list in sorted order.
-    TODO: Running time: O(1) Why and under what conditions? It takes constant time todo
+
+    Running time: n*O(1) Why and under what conditions? It takes constant time todo
     split the items in two portion. Q: what is the time complexity of slicing? O(n+k)
-    TODO: Memory usage: 3*O(n) Why and under what conditions? we have to allocate Memory
+
+    Memory usage: 3*O(1) Why and under what conditions? we have to allocate Memory
     for the two halfs we are creating and for mid"""
     mid = len(items)//2
     items1 = merge_sort(items[:mid])
@@ -54,8 +61,11 @@ def split_sort_merge(items):
 def merge_sort(items):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each recursively, and merging results into a list in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+
+    Running time: O(1) * n Why and under what conditions? this function runs recursively
+    until it hits its base case
+    Memory usage: not using any space Why and under what conditions? we are not defining a new
+    variable """
 
     if len(items) <= 1:
         return items
