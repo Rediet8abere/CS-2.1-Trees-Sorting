@@ -1,4 +1,5 @@
 # #!python
+from sorting_iterative import selection_sort, insertion_sort
 
 def merge(items1, items2, items):
     """Merge given lists of items, each assumed to already be in sorted order,
@@ -23,6 +24,7 @@ def merge(items1, items2, items):
             items[index] = items2[right]
             right+=1
         index += 1
+
     # if right is done first
     for item in items1[left:]:
         items[index] = item
@@ -41,21 +43,25 @@ def split_sort_merge(items):
     sorting each with an iterative sorting algorithm, and merging results into
     a list in sorted order.
 
-    Running time: n*O(1) Why and under what conditions? It takes constant time todo
-    split the items in two portion. Q: what is the time complexity of slicing? O(n+k)
-
-    Memory usage: 3*O(1) Why and under what conditions? we have to allocate Memory
-    for the two halfs we are creating and for mid"""
+    Running time: 2*O(n)^2 Why and under what conditions? each sorting methods take
+    quadratic time.
+    Memory usage: 2*O(n) Why and under what conditions? we are making a copy for items1 and items2"""
+    # [1, 4, 6, 7]
+    # [1, 4] [6, 7]
     mid = len(items)//2
-    items1 = merge_sort(items[:mid])
-    items2 = merge_sort(items[mid:])
-
-
+    items1 = items[:mid]
+    items2 = items[mid:]
+    selection_sort(items1)
+    insertion_sort(items2)
     return merge(items1, items2, items)
 
 
 
-# split_sort_merge([2, 5, 6, 9, 1, 3, 5, 8, 10])
+
+
+
+
+print("split merge: ", split_sort_merge([2, 5, 6, 9, 1, 3, 5, 8, 10]))
 
 
 def merge_sort(items):
@@ -70,7 +76,13 @@ def merge_sort(items):
     if len(items) <= 1:
         return items
 
-    return split_sort_merge(items)
+    mid = len(items)//2
+    items1 = merge_sort(items[:mid])
+    items2 = merge_sort(items[mid:])
+
+    return merge(items1, items2, items)
+
+    # split_sort_merge(items)
 
 print("Final: ", merge_sort([1, 6, 5, 2, 8, 10, 9, 5]))
 
