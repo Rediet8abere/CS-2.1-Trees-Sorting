@@ -88,7 +88,7 @@ def merge_sort(items):
 # print("Final: ", merge_sort([]))
 
 
-def partition(items, low, high, pivot):
+def partition(items, low, high):
     """Return index `p` after in-place partitioning given items in range
     `[low...high]` by choosing the last element as a pivot [ the first item
     can also be chosen, but that might not be a good pivot if the array is nearly
@@ -106,40 +106,30 @@ def partition(items, low, high, pivot):
     # TODO: Move items less than pivot into front of range [low...p-1]
     # TODO: Move items greater than pivot into back of range [p+1...high]
     # TODO: Move pivot item into final position [p] and return index p
-    print("low: ", items[low], low)
-    print("high: ", items[high], high)
 
-    # copied = items.copy() random.randint(0,                  #First: 1, 12, 9, 2, 17, 9, 6 #second: 1, 6, 9, 2, 17, 9, 12
-                                            #Third:
-                    # 9, 12, 9, 2, 17, 1, 6
-    p = pivot
-    print("p: ", p, items[p])
-    while low <= high:  #9, 12, 9, 2, 17, 1, 6
-        while items[low] < items[pivot]:
-            low += 1
-        while items[high] > items[pivot]:
-            high -= 1
-        if low <= high:
-            temp = items[low]
-            items[low] = items[high]
-            items[high] = temp
-            low += 1
-            high -= 1
-    return low
-
-        # if items[low] > items[p] and items[high] < items[p]:  #out of order
-        #     temp = items[low]  #swap
-        #     items[low] = items[high]
-        #     items[high] = temp
-        #     low += 1
-        #     high -= 1
-        #
-        # elif items[low] < items[p]:
-        #     print("items[low]: ", items[low], "items[p]: ", items[p])
-        #     low += 1
-        # else:   # items[high] > items[p]:
-        #     high -= 1
-
+    # pivot = items[len(items)-1]
+    # pIndex = low
+    divider = low
+    pivot = high
+    for i in range(low, high):
+        if items[i] < items[pivot]:
+            items[i], items[divider] = items[divider], items[i]
+            divider += 1
+    items[pivot], items[divider] = items[divider], items[pivot]
+    return divider
+    # print("p: ", p, items[p])
+    # while low <= high:  #9, 12, 9, 2, 17, 1, 6
+    #     while items[low] < items[pivot]:
+    #         low += 1
+    #     while items[high] > items[pivot]:
+    #         high -= 1
+    #     if low <= high:
+    #         temp = items[low]
+    #         items[low] = items[high]
+    #         items[high] = temp
+    #         low += 1
+    #         high -= 1
+    # return low
 
 
 
@@ -155,19 +145,18 @@ def quick_sort(items, low=None, high=None):
     # TODO: Check if list or range is so small it's already sorted (base case)
     # TODO: Partition items in-place around a pivot and get index of pivot
     # TODO: Sort each sublist range by recursively calling quick sort
-    if low == None and high == None:
-        low = 0
-        high = len(items)-1
-    print("in qucik sort", "low: ", low, "high: ", high)
-    if len(items) <=1: # base case
-        return items
+    # if low == None and high == None:
+    #     low = 0
+    #     high = len(items)-1
+    # print("in qucik sort", "low: ", low, "high: ", high)
+    # if len(items) <=1: # base case
+    #     return
     if low >= high:
-        return items
+        return
 
-    pivot = (low + high)//2
-    print("pivot: ", pivot)
-    p = partition(items, low, high, pivot)
+
+    p = partition(items, low, high)
     quick_sort(items, low, p-1)
-    quick_sort(items, p, high)
-    print("items: ", items)
-print("quick sort: ", quick_sort([9, 12, 9, 2, 17, 1, 6]))
+    quick_sort(items, p+1, high)
+    return items
+print("quick sort: ", quick_sort([9, 12, 9, 2, 17, 1, 6], 0, 6))
