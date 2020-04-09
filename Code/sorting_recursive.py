@@ -90,17 +90,15 @@ def merge_sort(items):
 
 def partition(items, low, high):
     """Return index `p` after in-place partitioning given items in range
-    `[low...high]` by choosing the last element as a pivot [ the first item
-    can also be chosen, but that might not be a good pivot if the array is nearly
-    soreted, we can pick the middle, but that might not be a good choice if the
-    array is not sorted. A good pivot would be the median of the first, last, and
-    middle that way we have a high probability of choosing the middle element
-    from the array ]from that range, moving pivot into index `p`, items
+    `[low...high]` for simplicity sake I chose the last element as the pivot
+    and the first element as the pivot index from that range, moving pivot into
+    index `p`, items
     less than pivot into range `[low...p-1]`, and items greater than pivot
     into range `[p+1...high]`.
-    TODO: Running time: for nearly sorted array the time complexity is O(n)^, for
-    unsorted list the time complexity is n log(n) Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    TODO: Running time: for nearly sorted array the time complexity is O(n)
+    Why and under what conditions? there is only one for loop
+    TODO: Memory usage: O(1) Why and under what conditions? in place sorting, not
+    allocating memeory """
     # TODO: Choose a pivot any way and document your method in docstring above
     # TODO: Loop through all items in range [low...high]
     # TODO: Move items less than pivot into front of range [low...p-1]
@@ -117,30 +115,19 @@ def partition(items, low, high):
             divider += 1
     items[pivot], items[divider] = items[divider], items[pivot]
     return divider
-    # print("p: ", p, items[p])
-    # while low <= high:  #9, 12, 9, 2, 17, 1, 6
-    #     while items[low] < items[pivot]:
-    #         low += 1
-    #     while items[high] > items[pivot]:
-    #         high -= 1
-    #     if low <= high:
-    #         temp = items[low]
-    #         items[low] = items[high]
-    #         items[high] = temp
-    #         low += 1
-    #         high -= 1
-    # return low
 
-
-
-# print("partition: ", partition([9, 12, 9, 2, 17, 1, 6], 0, 5))
 
 def quick_sort(items, low=None, high=None):
     """Sort given items in place by partitioning items in range `[low...high]`
     around a pivot item and recursively sorting each remaining sublist range.
-    TODO: Best case running time: ??? Why and under what conditions?
-    TODO: Worst case running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    Best case running time: n log(n) Why and under what conditions? if we choose a
+    pivot that lies in between of max and min value then we do log(n) iteration for
+    n elements that are in items
+    Worst case running time: n^2 Why and under what conditions? if the pivot
+    we choose is the min value or max value we keep iterating without doing any swap
+    # 12345 p=1, 2345, 345, 45, 5 #p=3, 12 45, 1 2, 3 4
+    Memory usage: O(1) Why and under what conditions? in place sorting
+    not allocating new memory"""
     # TODO: Check if high and low range bounds have default values (not given)
     # TODO: Check if list or range is so small it's already sorted (base case)
     # TODO: Partition items in-place around a pivot and get index of pivot
