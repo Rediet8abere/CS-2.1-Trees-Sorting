@@ -15,38 +15,26 @@ def merge(items1, items2, items):
 
     Memory usage: no memory usage Why and under what conditions? we are not allocating
     memory instead we are rearranging what's in items"""
-    # to keep track of where we are in items list
-    print(" ")
-    print("In MERGE")
-    print("items: ", items)
-    print("items1: ", items1)
-    print("items2: ", items2)
-    print(" ")
-    index = 0
-    left, right = 0, 0
-    merged = []
+
+    left = 0
+    right = 0
+    merged = [] # sorted merge
     # while we have not reached either the end of items1 or items2
     while left < len(items1) and right < len(items2):
         if items1[left] <= items2[right]:
-            print("items1[left]: ", items1[left], "items2[right]: ", items2[right])
             merged.append(items1[left])
-            # items[index] = items1[left]
             left+=1
+
         elif items2[right]  < items1[left]:
             merged.append(items2[right])
-            # items[index] = items2[right]
             right+=1
-        # index += 1
 
 
-    # print("items after being sorted: ", items, index)
-    # print("items at left: ", items1[left:], "items at right: ", items1[right:])
-    # print(" ")
-    # # if we are done with either items1 or items2 then
-    # # we don't need to extend since we are on items itself
+
+    # if we have left or right we append all the elements to merged
+    # if not we append nothing
     merged.extend(items1[left:])
     merged.extend(items2[right:])
-    # return items
     return merged
 
 
@@ -65,22 +53,15 @@ def split_sort_merge(items):
     mid = len(items)//2 #split array in to two parts
     items1 = items[:mid]
     items2 = items[mid:]
-    print("items1: ", items1)
-    print("items2: ", items2)
-    print(" ")
     # sort each half
     selection_sort(items1)
-    print("items1: ", items1)
 
     insertion_sort(items2)
-    print("items2: ", items2)
-
+    # store returned mereged
     sorted_items = merge(items1, items2, items)
-    # print("sorted_items: ", sorted_items)
+    # replace all indexes in items with items new arrangemnt
     items[:] = sorted_items
-    # # print("items: ", items)
-    # # for i in range(len(items)):
-    # #     items[i] = sorted_items[i]
+
     return items
 
 
@@ -109,7 +90,7 @@ def merge_sort(items):
 
     return items
 
-# print("Final: ", merge_sort('Doc Grumpy Happy Sleepy Bashful Sneezy Dopey'.split()))
+print("Final: ", merge_sort('Doc Grumpy Happy Sleepy Bashful Sneezy Dopey'.split()))
 
 
 def partition(items, low, high):

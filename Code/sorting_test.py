@@ -18,7 +18,9 @@ class IsSortedTest(unittest.TestCase):
         assert is_sorted([3, 5, 7]) is True
         # TODO: Write more positive test cases with assert is True statements
         # You'll need a lot more than this to test sorting algorithm robustness
-        # ...
+        assert is_sorted([3, 3, 5, 5, 5, 7, 7, 7, 7]) is True #testing duplicate list
+        assert is_sorted([-5, -5, -4, -1, 0]) is True #testing negative integers and zero
+        assert is_sorted([-19, -2, -2, -1, 0, 3, 3, 5, 5, 5, 7, 7, 7, 7]) is True #testing a mix of +&- integers
 
     def test_is_sorted_on_unsorted_integers(self):
         # Negative test cases (counterexamples) with lists of unsorted integers
@@ -27,7 +29,8 @@ class IsSortedTest(unittest.TestCase):
         assert is_sorted([7, 5, 3]) is False
         # TODO: Write more negative test cases with assert is False statements
         # You'll need a lot more than this to test sorting algorithm robustness
-        # ...
+        assert is_sorted([7, 7, 7, 5, 3]) is False #testing duplicate list
+        assert is_sorted([-1, -7, -4, -7, -5, -3]) is False #testing negative integers
 
     def test_is_sorted_on_sorted_strings(self):
         # Positive test cases (examples) with lists of sorted strings
@@ -37,7 +40,9 @@ class IsSortedTest(unittest.TestCase):
         assert is_sorted(['A', 'B', 'C']) is True
         # TODO: Write more positive test cases with assert is True statements
         # You'll need a lot more than this to test sorting algorithm robustness
-        # ...
+        assert is_sorted(['A', 'A', 'B', 'B', 'C', 'C']) is True #testing duplicate upper case list
+        assert is_sorted(['a', 'a', 'b', 'b', 'c', 'c']) is True #testing duplicate lower case list
+        assert is_sorted(['A', 'B', 'C', 'a', 'b', 'c']) is True #testing a mix of upper case and lower case
 
     def test_is_sorted_on_unsorted_strings(self):
         # Negative test cases (counterexamples) with lists of unsorted strings
@@ -46,7 +51,12 @@ class IsSortedTest(unittest.TestCase):
         assert is_sorted(['C', 'B', 'A']) is False
         # TODO: Write more negative test cases with assert is False statements
         # You'll need a lot more than this to test sorting algorithm robustness
-        # ...
+        assert is_sorted(['C', 'C', 'C', 'B', 'A', 'A', 'A']) is False #testing duplicate upper case list
+        assert is_sorted(['c', 'c', 'b', 'b', 'a', 'a']) is False #testing duplicate lower case list
+        #testing a mix of upper case and lower case
+        assert is_sorted(['A', 'a', 'B', 'b', 'C', 'c']) is False
+        assert is_sorted(['a', 'A', 'b', 'B', 'c', 'C']) is False
+        assert is_sorted(['a', 'b', 'c', 'A', 'B', 'C']) is False
 
     def test_is_sorted_on_sorted_tuples(self):
         # Positive test cases (examples) with lists of sorted tuples
@@ -65,7 +75,9 @@ class IsSortedTest(unittest.TestCase):
         assert is_sorted([(3, 'A'), (5, 'A')]) is True  # First item sorted
         assert is_sorted([(3, 'A'), (3, 'B')]) is True  # Second item sorted
         # TODO: Write more positive test cases with assert is True statements
-        # ...
+        assert is_sorted([(-3, 'A'), (-3, 'A'), (3, 'B'), (5, 'B')]) is True #testing negative with tuples
+        assert is_sorted([('a', 'A'), ('b', 'A'), ('c', 'B'), ('d', 'B')]) is True #testing upper and lower case in tuple
+        assert is_sorted([('A', 'a'), ('B', 'b'), ('C', 'c'), ('D', 'd')]) is True
 
     def test_is_sorted_on_unsorted_tuples(self):
         # Negative test cases (counterexamples) with lists of unsorted tuples
@@ -76,7 +88,7 @@ class IsSortedTest(unittest.TestCase):
         assert is_sorted([('B', 3), ('A', 5)]) is False  # First item unsorted
         assert is_sorted([('A', 5), ('A', 3)]) is False  # Second item unsorted
         # TODO: Write more negative test cases with assert is False statements
-        # ...
+        assert is_sorted([('a', 'a'), ('A', 'A')]) is False
 
 
 class IntegerSortTest(unittest.TestCase):
@@ -218,7 +230,7 @@ def get_sort_function():
 # If using PyTest, change this variable to the sort function you want to test
 # selection_sort, insertion_sort
 # split_sort_merge, merge_sort, quick_sort
-sort = merge_sort
+sort = insertion_sort
 
 
 if __name__ == '__main__':
