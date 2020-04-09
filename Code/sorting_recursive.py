@@ -15,28 +15,39 @@ def merge(items1, items2, items):
 
     Memory usage: no memory usage Why and under what conditions? we are not allocating
     memory instead we are rearranging what's in items"""
+    # to keep track of where we are in items list
+    print(" ")
+    print("In MERGE")
+    print("items: ", items)
+    print("items1: ", items1)
+    print("items2: ", items2)
+    print(" ")
     index = 0
     left, right = 0, 0
+    merged = []
+    # while we have not reached either the end of items1 or items2
     while left < len(items1) and right < len(items2):
-        if items1[left] < items2[right]:
-            items[index] = items1[left]
+        if items1[left] <= items2[right]:
+            print("items1[left]: ", items1[left], "items2[right]: ", items2[right])
+            merged.append(items1[left])
+            # items[index] = items1[left]
             left+=1
-        else:
-            items[index] = items2[right]
+        elif items2[right]  < items1[left]:
+            merged.append(items2[right])
+            # items[index] = items2[right]
             right+=1
-        index += 1
-
-    # if right is done first
-    for item in items1[left:]:
-        items[index] = item
-        index += 1
-    # if left is done first
-    for item in items2[right:]:
-        items[index] = item
-        index += 1
+        # index += 1
 
 
-    return items
+    # print("items after being sorted: ", items, index)
+    # print("items at left: ", items1[left:], "items at right: ", items1[right:])
+    # print(" ")
+    # # if we are done with either items1 or items2 then
+    # # we don't need to extend since we are on items itself
+    merged.extend(items1[left:])
+    merged.extend(items2[right:])
+    # return items
+    return merged
 
 
 def split_sort_merge(items):
@@ -44,48 +55,61 @@ def split_sort_merge(items):
     sorting each with an iterative sorting algorithm, and merging results into
     a list in sorted order.
 
-    Running time: 2*O(n)^2 Why and under what conditions? each sorting methods take
-    quadratic time.
+    Running time: O(n/2)^2 = O(n^2)/4 Why and under what conditions? each sorting methods take
+    quadratic time and items is divided into two parts before being sorted.
     Memory usage: 2*O(n) Why and under what conditions? we are making a copy for items1 and items2"""
-    # [1, 4, 6, 7]
-    # [1, 4] [6, 7]
-    mid = len(items)//2
+    print("items: ", items)
+    if len(items) <= 1:
+        return items
+
+    mid = len(items)//2 #split array in to two parts
     items1 = items[:mid]
     items2 = items[mid:]
+    print("items1: ", items1)
+    print("items2: ", items2)
+    print(" ")
+    # sort each half
     selection_sort(items1)
+    print("items1: ", items1)
+
     insertion_sort(items2)
-    return merge(items1, items2, items)
+    print("items2: ", items2)
+
+    sorted_items = merge(items1, items2, items)
+    # print("sorted_items: ", sorted_items)
+    items[:] = sorted_items
+    # # print("items: ", items)
+    # # for i in range(len(items)):
+    # #     items[i] = sorted_items[i]
+    return items
 
 
-
-
-
-
-
-# print("split merge: ", split_sort_merge([2, 5, 6, 9, 1, 3, 5, 8, 10]))
+# print("split merge: ", split_sort_merge('Doc Grumpy Happy Sleepy Bashful Sneezy Dopey'.split()))
+# print("split merge: ", split_sort_merge([3, 3, 5, 5, 5, 7, 7, 7, 7]))
 
 
 def merge_sort(items):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each recursively, and merging results into a list in sorted order.
 
-    Running time: O(1) * n Why and under what conditions? this function runs recursively
+    Running time: n log(n) Why and under what conditions? this function runs recursively
     until it hits its base case
-    Memory usage: not using any space Why and under what conditions? we are not defining a new
-    variable """
+    Memory usage: n log n Why and under what conditions? we create n memories for logn iteration"""
 
     if len(items) <= 1:
         return items
 
-    mid = len(items)//2
+    mid = len(items)//2 #split items to two parts
     items1 = merge_sort(items[:mid])
     items2 = merge_sort(items[mid:])
 
-    return merge(items1, items2, items)
+    sorted_items = merge(items1, items2, items)
+    # print("sorted_items: ", sorted_items)
+    items[:] = sorted_items
 
-    # split_sort_merge(items)
+    return items
 
-# print("Final: ", merge_sort([]))
+# print("Final: ", merge_sort('Doc Grumpy Happy Sleepy Bashful Sneezy Dopey'.split()))
 
 
 def partition(items, low, high):
@@ -99,20 +123,17 @@ def partition(items, low, high):
     Why and under what conditions? there is only one for loop
     TODO: Memory usage: O(1) Why and under what conditions? in place sorting, not
     allocating memeory """
-    # TODO: Choose a pivot any way and document your method in docstring above
-    # TODO: Loop through all items in range [low...high]
-    # TODO: Move items less than pivot into front of range [low...p-1]
-    # TODO: Move items greater than pivot into back of range [p+1...high]
-    # TODO: Move pivot item into final position [p] and return index p
-
-    # pivot = items[len(items)-1]
-    # pIndex = low
-    divider = low
-    pivot = high
+    # Choose a pivot any way and document your method in docstring above
+    divider = low #keeps track of the pivot index used for comparision
+    pivot = high #default pivot index
+    # Loop through all items in range [low...high]
     for i in range(low, high):
-        if items[i] < items[pivot]:
-            items[i], items[divider] = items[divider], items[i]
-            divider += 1
+    # Move items less than pivot into front of range [low...p-1]
+    # Move items greater than pivot into back of range [p+1...high]
+        if items[i] < items[pivot]: #this does the work
+            items[i], items[divider] = items[divider], items[i] # by moving the items less than
+            divider += 1 # and leaving items greater where they are
+    # Move pivot item into final position [p] and return index p
     items[pivot], items[divider] = items[divider], items[pivot]
     return divider
 
@@ -128,22 +149,18 @@ def quick_sort(items, low=None, high=None):
     # 12345 p=1, 2345, 345, 45, 5 #p=3, 12 45, 1 2, 3 4
     Memory usage: O(1) Why and under what conditions? in place sorting
     not allocating new memory"""
-    # TODO: Check if high and low range bounds have default values (not given)
-    # TODO: Check if list or range is so small it's already sorted (base case)
-    # TODO: Partition items in-place around a pivot and get index of pivot
-    # TODO: Sort each sublist range by recursively calling quick sort
-    # if low == None and high == None:
-    #     low = 0
-    #     high = len(items)-1
-    # print("in qucik sort", "low: ", low, "high: ", high)
-    # if len(items) <=1: # base case
-    #     return
+    # Check if high and low range bounds have default values (not given)
+    if low == None and high == None:
+        low = 0
+        high = len(items)-1
+    # Check if list or range is so small it's already sorted (base case)
     if low >= high:
         return
-
-
+    # Partition items in-place around a pivot and get index of pivot
     p = partition(items, low, high)
+    # Sort each sublist range by recursively calling quick sort
     quick_sort(items, low, p-1)
     quick_sort(items, p+1, high)
+
     return items
-print("quick sort: ", quick_sort([9, 12, 9, 2, 17, 1, 6], 0, 6))
+# print("quick sort: ", quick_sort([9, 12, 9, 2, 17, 1, 6], 0, 6))
