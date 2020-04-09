@@ -96,7 +96,6 @@ class IntegerSortTest(unittest.TestCase):
     def test_sort_on_empty_list(self):
         items = []
         sort(items)
-        print("hello")
         assert items == []  # List should not be changed
 
     def test_sort_on_small_lists_of_integers(self):
@@ -111,7 +110,15 @@ class IntegerSortTest(unittest.TestCase):
         assert items3 == [3, 5, 7]
         # TODO: Write more test cases with assert equal list statements
         # You'll need a lot more than this to test sorting algorithm robustness
-        # ...
+        items4 = [1, 4, 2, 3, 0]
+        sort(items4)
+        assert items4 == [0, 1, 2, 3, 4]
+        items5 = [-1, -5, -9, 0, 5]
+        sort(items5)
+        assert items5 == [-9, -5, -1, 0, 5] # sort negative and positive
+        items6 = [-4, -1, -2, -7, -9]
+        sort(items6)
+        assert items6 == [-9, -7, -4, -2, -1]
 
     def test_sort_on_small_lists_of_integers_with_duplicates(self):
         items1 = [3, 3]
@@ -129,7 +136,13 @@ class IntegerSortTest(unittest.TestCase):
         # TODO: Create lists of integers with many duplicate values
         # TODO: Write more test cases with assert equal list statements
         # You'll need a lot more than this to test sorting algorithm robustness
-        # ...
+        items4 = [0, 0, 0, 0, 0]
+        sort(items4)
+        assert items4 == [0, 0, 0, 0, 0]
+        items5 = [-1, -5, -9, -5, -5]
+        sort(items5)
+        assert items5 == [-9, -5, -5, -5, -1] # sort negative and positive
+
 
     def test_sort_on_lists_of_random_integers(self):
         # Generate list of 10 random integers from range [1...20]
@@ -184,7 +197,9 @@ class StringSortTest(unittest.TestCase):
         assert items3 == ['A', 'B', 'C']
         # TODO: Write more test cases with assert equal list statements
         # You'll need a lot more than this to test sorting algorithm robustness
-        # ...
+        items4 = ['A', 'A', 'B', 'B', 'D', 'C', 'K']
+        sort(items4)
+        assert items4 == ['A', 'A', 'B', 'B', 'C', 'D', 'K']
 
     def test_sort_on_fish_book_title(self):
         items = 'one fish two fish red fish blue fish'.split()
