@@ -46,7 +46,7 @@ def split_sort_merge(items):
     Running time: O(n/2)^2 = O(n^2)/4 Why and under what conditions? each sorting methods take
     quadratic time and items is divided into two parts before being sorted.
     Memory usage: 2*O(n) Why and under what conditions? we are making a copy for items1 and items2"""
-    print("items: ", items)
+    # print("items: ", items)
     if len(items) <= 1:
         return items
 
@@ -75,7 +75,11 @@ def merge_sort(items):
 
     Running time: n log(n) Why and under what conditions? this function runs recursively
     until it hits its base case
-    Memory usage: n log n Why and under what conditions? we create n memories for logn iteration"""
+    Memory usage: n log n Why and under what conditions? we create n memories for logn iteration
+
+    Experiment: merge sort is much faster for unorderd list with running time nlog n where as
+    insertion and bubble sort is much faster for nearly sorted list because we can exit early
+    with running time O(n)"""
 
     if len(items) <= 1:
         return items
@@ -90,7 +94,7 @@ def merge_sort(items):
 
     return items
 
-print("Final: ", merge_sort('Doc Grumpy Happy Sleepy Bashful Sneezy Dopey'.split()))
+# print("Final: ", merge_sort('Doc Grumpy Happy Sleepy Bashful Sneezy Dopey'.split()))
 
 
 def partition(items, low, high):

@@ -42,8 +42,8 @@ def bubble_sort(items):
             count += 1
         # so that we don't compare the item in the end of list that are already sorted
         n -= 1
-    # print(count, items)
-# bubble_sort([1, 2, 4, 7, 9])
+    return items
+
 def selection_sort(items):
     """Sort given items by finding minimum item, swapping it with first
     unsorted item, and repeating until all items are in sorted order.
@@ -65,7 +65,7 @@ def selection_sort(items):
         items[i] = items[min]
         items[min] = temp
 
-    # print("items", items, count)
+    return items
 
 
 
@@ -78,7 +78,6 @@ def insertion_sort(items):
     out early.
     TODO: Memory usage: 4*O(1)~O(1) Why and under what conditions? we are allocating
     memory for key and j"""
-
     for i in range(len(items)):
         key = items[i]
         j=i-1
@@ -86,7 +85,7 @@ def insertion_sort(items):
             items[j+1]=items[j]
             j-=1
         items[j+1]=key
-
+    return items
     # print("items: ", items)
 
 insertion_sort([9, 7, 4, 1, 2])

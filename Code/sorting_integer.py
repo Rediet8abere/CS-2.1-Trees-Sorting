@@ -1,4 +1,7 @@
 
+from linkedlist import LinkedList
+from sorting_iterative import bubble_sort, insertion_sort
+from sorting_recursive import merge, quick_sort
 
 def counting_sort(numbers):
     """Sort given numbers (integers) by counting occurrences of each number,
@@ -6,62 +9,64 @@ def counting_sort(numbers):
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
     # TODO: Find range of given numbers (minimum and maximum integer values)
-    # maxNum = max(numbers)
+    maxNum = max(numbers)
     # minNum = min(numbers)
     # # TODO: Create list of counts with a slot for each number in input range
-    # listCount = {}
-    # for i in range(len(numbers)):
-    #     if numbers[i] not in listCount:
-    #         listCount[numbers[i]] = 1
-    #     else:
-    #          listCount[numbers[i]] += 1
-    # listCountValues = listCount.values()
-    # print("listCountValues: ", listCountValues)
+    countArr = []
+    # initalize array
+    for i in range(maxNum+1):
+        countArr.append(0)
+    print("countArr: ", countArr)
+    # count at index
+    for i in range(len(numbers)):
+        countArr[numbers[i]] += 1
+    print("countArr: ", countArr)
+    newArr = []
+    # sort O(n)*O(f)
+    for i in range(len(countArr)):
+    # for index, i in enumerate(countArr):
+        # print("index: ", index, "i: ", i)
+        for j in range(countArr[i]):
+            newArr.append(i)
+
+    return newArr
+
+
+
 
     # TODO: Loop over given numbers and increment each number's count
     # TODO: Loop over counts and append that many numbers into output list
     # outputList = []
     # FIXME: Improve this to mutate input instead of creating new output list
-counting_sort([47, 3, 47, 47, 75, 84, 41, 10, 90, 63])
 
-def bucket_sort(numbers, num_buckets=10):
+# counting_sort([17, 3, 17, 17, 1, 10, 10, 13, 1])
+
+def bucket_sort(numbers, num_buckets=3):
     """Sort given numbers by distributing into buckets representing subranges,
     then sorting each bucket and concatenating all buckets in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
     # TODO: Find range of given numbers (minimum and maximum values)
-    # maxNum = max(numbers)
+    maxNum = max(numbers)
     # minNum = min(numbers)
-    # print("maxNum: ", maxNum, "minNum: ", minNum)
+
     # # TODO: Create list of buckets to store numbers in subranges of input range
-    # node = Node(0)
-    # bucket = [node for i in range(num_buckets+1)]
-    # print("bucket: ", bucket)
+    bucket_list = [LinkedList() for _ in range(num_buckets)]
+
     # # TODO: Loop over given numbers and place each item in appropriate bucket
-    # # ll = LinkedList()
-    # for i in range(num_buckets):
-    #     index = (numbers[i]*num_buckets)//maxNum
-    #
-    #     insert_at_index(bucket, numbers[i], index)
-    #     # print("index", index, 'bucket', bucket[index])
-    # print("bucket: ", bucket)
-    # newArray = []
-    # for i in range(num_buckets):
-    #     head_node = bucket[i]
-    #     print("head_node on", head_node)
-    #     cur_node = head_node.next
-    #     print("cur_node ->", cur_node)
-    #     # cur_node = cur_node.next
-    #     print("none ", cur_node)
-    #     while not cur_node == None:
-    #         # print("not none ", cur_node)
-    #         newArray.append(cur_node.data)
-    #         cur_node = cur_node.next
-    #         # print(" none ", cur_node)
-    # print("newArray: ", newArray)
-    # print("ll: ", ll)
-    # TODO: Sort each bucket using any sorting algorithm (recursive or another)
-    # TODO: Loop over buckets and append each bucket's numbers into output list
+    for i in range(len(numbers)):
+        if numbers[i] <= 9:
+            bucket_list[0].append(numbers[i])
+        elif 9 < numbers[i] <= 19:
+            bucket_list[1].append(numbers[i])
+        else:
+            bucket_list[2].append(numbers[i])
+    # Sort each bucket using any sorting algorithm (recursive or another)
+    # Loop over buckets and append each bucket's numbers into output list
+    new_arr = []
+    for i in range(len(bucket_list)):
+        new_arr.extend(insertion_sort(bucket_list[i].items()))
+    return new_arr
     # FIXME: Improve this to mutate input instead of creating new output list
 
-# bucket_sort([29, 3, 11, 47, 75, 84, 41, 10, 90, 63])
+# print("bucket sort: ", bucket_sort([17, 3, 17, 17, 1, 10, 10, 13, 1, 25, 20, 28, 13, 16, 11, 8, 4]))
