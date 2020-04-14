@@ -6,10 +6,10 @@ from sorting_recursive import merge, quick_sort
 def counting_sort(numbers):
     """Sort given numbers (integers) by counting occurrences of each number,
     then looping over counts and copying that many numbers into output list.
-    TODO: Running time: O(max+1-min) + O(n) + O(max+1-min*freq) where freq is
+    Running time: O(max+1-min) + O(n) + O(max+1-min*freq) where freq is
     frequency of unique elements Why and under what conditions? we loop max+1-min
     times and perform freq opertaions.
-    TODO: Memory usage: O(max-min) Why and under what conditions? we allocate
+    Memory usage: O(max-min) Why and under what conditions? we allocate
     max-min memory to keep track of frequency.
     """
     # Find range of given numbers (minimum and maximum integer values)
@@ -39,8 +39,11 @@ def counting_sort(numbers):
 def bucket_sort(numbers, num_buckets=3):
     """Sort given numbers by distributing into buckets representing subranges,
     then sorting each bucket and concatenating all buckets in sorted order.
-    TODO: Running time: 2*O(num_buckets) + O(n) Why and under what conditions?
-    TODO: Memory usage: O(num_buckets) Why and under what conditions? we have to
+    Running time: 2*O(num_buckets) + O(n) + running time of sorting algo
+    Why and under what conditions? loop num_buckets times to initalize an array
+    loop n times to place number in the right bucket loop num_buckets times
+    to sort.
+    Memory usage: O(num_buckets) Why and under what conditions? we have to
     allocate memory for buckets"""
     # Find range of given numbers (minimum and maximum values)
     maxNum = max(numbers)
