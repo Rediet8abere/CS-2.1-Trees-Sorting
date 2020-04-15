@@ -54,13 +54,15 @@ def bucket_sort(numbers, num_buckets=3):
 
     # Loop over given numbers and place each item in appropriate bucket
     for i in range(len(numbers)):
-        # index = numbers[i] - minNum
-        if numbers[i] <= 9:
-            bucket_list[0].append(numbers[i])
-        elif 9 < numbers[i] <= 19:
-            bucket_list[1].append(numbers[i])
-        else:
-            bucket_list[2].append(numbers[i])
+        index = numbers[i] - minNum
+        index = int(numbers[i]/10)
+        bucket_list[index].append(numbers[i])
+        # if numbers[i] <= 9:
+        #     bucket_list[0].append(numbers[i])
+        # elif 9 < numbers[i] <= 19:
+        #     bucket_list[1].append(numbers[i])
+        # else:
+            # bucket_list[2].append(numbers[i])
     # Sort each bucket using any sorting algorithm (recursive or another)
     # Loop over buckets and append each bucket's numbers into output list
     start = 0
