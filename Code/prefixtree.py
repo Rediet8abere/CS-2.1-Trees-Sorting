@@ -128,7 +128,12 @@ class PrefixTree:
         # Create a list of all strings in prefix tree
         all_strings = []
         # TODO
-
+        cur_node = self.root
+        for char in cur_node.children.keys():
+            all_strings.extend(self.complete(char))
+            # print(char)
+        # print(all_strings)
+        return all_strings
     def _traverse(self, node, prefix, visit):
         """Traverse this prefix tree with recursive depth-first traversal.
         Start at the given node with the given prefix representing its path in
@@ -137,34 +142,40 @@ class PrefixTree:
         # TODO
         # print("traversing", "visiting: ", visit, node, prefix, node.num_children())
         # # print("node.num_children(): ", node.num_children(), node, node.children, node.children['B'].children)
-        print("inside")
+        # print("inside")
 
-
+        # node has no children return contorl back to the caller
         if node.num_children() == 0:
-            print("hello world")
+            # print("hello world")
             return
+        # if this node contains char that ends the word then add to complteions
         if node.terminal == True:
-            print("node: ", node)
+            # print("node: ", node)
             visit.append(prefix)
 
         # print("node.children.keys(): ", node.children.keys())
-        print("start node: ", node, node.children, list(node.children.keys()))
+        # print("start node: ", node, node.children, list(node.children.keys()))
         # string = prefix
+        # for char in children keys
         for char in node.children.keys():
             # visit.append()
-            print("char: ", char)
+            # print("char: ", char)
+            # concatenate prefix with char
             string = prefix + char
-            print("string: ", string)
+            # print("string: ", string)
             # prefix += char
             # print("visit before: ", visit, prefix)
-            print("visit after : ", visit)
+            # print("visit after : ", visit)
             # node =  node.children[char]
+            # if this node makes a word then add to completions
             if node.children[char].terminal == True:
                 visit.append(string)
             # if node.terminal == True:
             #     visit.append(prefix)
+            # otherwise make it a prefix and keep going
             else:
                 prefix = string
+            # make a recursive call until we reach the end of the trie(with no children)
             self._traverse(node.children[char], prefix, visit)
 
             # string = prefix
@@ -189,10 +200,11 @@ def create_prefix_tree(strings):
     # print(tree.insert('ABC'))
 
     tree = PrefixTree(strings)
+    tree.strings()
     #Verify completions for all substrings
     # tree.complete('ABC') == ['ABC']
     # tree.complete('AB') == ['ABC', 'ABD']
-    tree.complete('A') == ['A', 'ABC', 'ABD']
+    # tree.complete('A') == ['A', 'ABC', 'ABD']
     # tree.complete('ABD') == ['ABD']
 
 
