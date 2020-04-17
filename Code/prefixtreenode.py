@@ -39,15 +39,15 @@ class PrefixTreeNode:
     def get_child(self, character):
         """Return this prefix tree node's child node that represents the given
         character if it is amongst its children, or raise ValueError if not."""
-        print("get_child: >>>>", character)
+        # print("get_child: >>>>", character)
         if self.has_child(character):
             # TODO: Find child node for given character in this node's children
-            print("hi there", self.children[character])
-            print("self.children: ", self.children)
+            # print("hi there", self.children[character])
+            # print("self.children: ", self.children)
 
             return self.children[character]
         else:
-            print("how you doing? ")
+            # print("how you doing? ")
             raise ValueError(f'No child exists for character {character!r}')
 
     def add_child(self, character, child_node):
@@ -55,9 +55,9 @@ class PrefixTreeNode:
         raise ValueError if given character is amongst this node's children."""
         if not self.has_child(character):
             # TODO: Add given character and child node to this node's children
-            print("adding: ", character, self.children)
+            # print("adding: ", character, self.children)
             self.children[character] = child_node
-            print("self.children: ", self.children)
+            # print("self.children: ", self.children)
         else:
             raise ValueError(f'Child exists for character {character!r}')
 
