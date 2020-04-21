@@ -39,52 +39,53 @@ class PrefixTree:
         return self.size == 0
 
     def contains(self, string):
-        """Return True if this prefix tree contains the given string."""
-        # TODO
+        """Return True if this prefix tree contains the given string.
+        Running-Time: O(n) where n is the length of string.
+        Space-Complexity: 2*O(1) we instantiate a variable to traverse through prefixtree.
+        """
         if string == "":
             return True
         cur_node = self.root
         for s in string:
             # if character is not root's children
-            if s not in cur_node.children:
+            if s not in cur_node.children: #Constant look up
                 return False
-            cur_node = cur_node.children[s]
+            cur_node = cur_node.get_child(s)
         return cur_node.terminal == True
 
 
 
     def insert(self, string):
-        """Insert the given string into this prefix tree."""
-        # TODO
+        """Insert the given string into this prefix tree.
+        Running-Time: O(n) where n is the length of string.
+        Space-Complexity: 3*O(1) we instantiate a variable to traverse through prefixtree.
+        """
         cur_node = self.root
-        # print("cur_node: ", cur_node.children)
         unique = False
         for s in string:
             if s not in cur_node.children:
                 unique = True
                 cur_node.children[s] = PrefixTreeNode(s)
-                # print("cur_node: ", cur_node)
             cur_node = cur_node.children[s]
-        # print("cur_node: done", cur_node)
         cur_node.terminal = True
         if unique:
             self.size += 1
-
-        # print("cur_node terminal: ", cur_node.terminal)
 
 
     def _find_node(self, string):
         """Return a pair containing the deepest node in this prefix tree that
         matches the longest prefix of the given string and the node's depth.
         The depth returned is equal to the number of prefix characters matched.
-        Search is done iteratively with a loop starting from the root node."""
+        Search is done iteratively with a loop starting from the root node.
+        Running-Time: O(n) where n is the length of string.
+        Space-Complexity: 3*O(1) we instantiate a variable to traverse through prefixtree."""
         # Match the empty string
         if len(string) == 0:
             return self.root, 0
-        # Start with the root node
 
+        # Start with the root node
         node = self.root
-        # TODO
+
         depth = 0
         while node:
             node = node.children
@@ -94,50 +95,45 @@ class PrefixTree:
 
     def complete(self, prefix):
         """Return a list of all strings stored in this prefix tree that start
-        with the given prefix string."""
+        with the given prefix string.
+        Running-Time: O(n) where n is the length of string.
+        Space-Complexity: 3*O(1) we instantiate a variable to traverse through prefixtree."""
         # Create a list of completions in prefix tree
         completions = []
-        # TODO
-        print("prefix in complete: ", prefix)
         string = prefix
         cur_node = self.root
         preintri = False
+        # print("find node", self._find_node(string))
         for p in prefix:
             if p in cur_node.children:
                 preintri = True
                 cur_node = cur_node.children[p]
             elif p not in cur_node.children:
                 return completions
-        print("cur_node complete: ", cur_node)
 
         self._traverse(cur_node, prefix, completions)
         if completions == [] and preintri == True:
             completions.append(prefix)
-        # while cur_node:
-        #     string += cur_node.character
-        #     if cur_node.character in cur_node.children:
-        #         cur_node = cur_node.children[cur_node.character]
-        #     if cur_node.terminal == True:
-        #         completions.append(string)
-        #         string = prefix
-        print("completions: ", completions)
         return completions
 
     def strings(self):
-        """Return a list of all strings stored in this prefix tree."""
+        """Return a list of all strings stored in this prefix tree.
+        Running-Time: O(n) where n is the length of string.
+        Space-Complexity: 3*O(1) we instantiate a variable to traverse through prefixtree."""
         # Create a list of all strings in prefix tree
         all_strings = []
         # TODO
         cur_node = self.root
         for char in cur_node.children.keys():
             all_strings.extend(self.complete(char))
-            # print(char)
-        # print(all_strings)
         return all_strings
     def _traverse(self, node, prefix, visit):
         """Traverse this prefix tree with recursive depth-first traversal.
         Start at the given node with the given prefix representing its path in
-        this prefix tree and visit each node with the given visit function."""
+        this prefix tree and visit each node with the given visit function.
+        Running-Time: O(n*m) where n is the number of time we loop through child_node
+                    and m is the number of time we make recursive call
+        Space-Complexity: 3*O(1) we instantiate a variable to traverse through prefixtree."""
 
 
         # node has no children return contorl back to the caller
@@ -175,7 +171,7 @@ def create_prefix_tree(strings):
     tree = PrefixTree(strings)
     tree.strings()
     #Verify completions for all substrings
-    # tree.complete('ABC') == ['ABC']
+    tree.complete('ABC') == ['ABC']
     # tree.complete('AB') == ['ABC', 'ABD']
     # tree.complete('A') == ['A', 'ABC', 'ABD']
     # tree.complete('ABD') == ['ABD']
