@@ -48,8 +48,10 @@ class BinaryMinHeap(object):
 
     def delete_min(self):
         """Remove and return the minimum item at the root of this heap.
-        TODO: Best case running time: ??? under what conditions?
-        TODO: Worst case running time: ??? under what conditions?"""
+        Best case running time: O(1) We don't have to swap
+        Worst case running time: O(log n) After deleting the item we have to
+        swap it to it's child unitl we get to the point where it is no longer
+        greater than it's child or leaf node"""
         if self.size() == 0:
             raise ValueError('Heap is empty and has no minimum item')
         elif self.size() == 1:
@@ -68,8 +70,10 @@ class BinaryMinHeap(object):
         """Remove and return the minimum item at the root of this heap,
         and insert the given item into this heap.
         This method is more efficient than calling delete_min and then insert.
-        TODO: Best case running time: ??? under what conditions?
-        TODO: Worst case running time: ??? under what conditions?"""
+        Best case running time: O(1) We don't have to swap
+        Worst case running time: O(log n) After deleting the item we have to
+        swap it to it's child unitl we get to the point where it is no longer
+        greater than it's child or leaf node"""
         if self.size() == 0:
             raise ValueError('Heap is empty and has no minimum item')
         assert self.size() > 0
