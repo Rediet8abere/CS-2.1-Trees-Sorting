@@ -15,16 +15,17 @@ def counting_sort(numbers):
     # Find range of given numbers (minimum and maximum integer values)
     maxNum = max(numbers)
     minNum = min(numbers)
+    print("numbers: ", numbers)
     # Create list of counts with a slot for each number in input range
     count_arr = []
     for i in range(minNum, maxNum+1):
         count_arr.append(0)
-
+    print("count_arr: ", count_arr)
     # Loop over given numbers and increment each number's count
     for i in range(len(numbers)):
         index = numbers[i] - minNum
         count_arr[index] += 1
-
+    print("count_arr: *****", count_arr)
     # Loop over counts and append that many numbers into output list
     i = 0
     for index in range(len(count_arr)):
@@ -51,10 +52,11 @@ def bucket_sort(numbers, num_buckets=3):
 
     # Create list of buckets to store numbers in subranges of input range
     bucket_list = [LinkedList() for _ in range(num_buckets)]
-
+    print("bucket init: ", bucket_list)
+    print("numbers: ", numbers)
     # Loop over given numbers and place each item in appropriate bucket
     for i in range(len(numbers)):
-        index = numbers[i] - minNum
+        print("numbers[i]/10: ", numbers[i]/10)
         index = int(numbers[i]/10)
         bucket_list[index].append(numbers[i])
         # if numbers[i] <= 9:
@@ -63,6 +65,7 @@ def bucket_sort(numbers, num_buckets=3):
         #     bucket_list[1].append(numbers[i])
         # else:
             # bucket_list[2].append(numbers[i])
+    print("bucket_list: ", bucket_list)
     # Sort each bucket using any sorting algorithm (recursive or another)
     # Loop over buckets and append each bucket's numbers into output list
     start = 0
