@@ -163,30 +163,58 @@ class BinaryMinHeap(object):
         """Return the right child index of the item at the given index."""
         return (index << 1) + 2  # Shift left to multiply by 2
 
+    def heap_sort(self):
+        items = [9, 25, 86, 3, 29, 5, 55]
+        heap = BinaryMinHeap()
+        print('heap: {}'.format(heap))
+
+        print('\nInserting items:')
+        for index, item in enumerate(items):
+            heap.insert(item)
+            # print('insert({})'.format(item))
+            # print('heap: {}'.format(heap))
+            # print('size: {}'.format(heap.size()))
+            heap_min = heap.get_min()
+            real_min = min(items[: index + 1])
+            correct = heap_min == real_min
+            # print('get_min: {}, correct: {}'.format(heap_min, correct))
+
+        sorted_array = []
+        print('\nDeleting items:')
+        for item in sorted(items):
+            heap_min = heap.delete_min()
+            sorted_array.append(heap_min)
+            # print('delete_min: {}'.format(heap_min))
+            # print('heap: {}'.format(heap))
+            # print('size: {}'.format(heap.size()))
+        print("sorted_array: ", sorted_array)
+
 
 def test_binary_min_heap():
+
     # Create a binary min heap of 7 items
-    items = [9, 25, 86, 3, 29, 5, 55]
+    # items = [9, 25, 86, 3, 29, 5, 55]
     heap = BinaryMinHeap()
-    print('heap: {}'.format(heap))
-
-    print('\nInserting items:')
-    for index, item in enumerate(items):
-        heap.insert(item)
-        print('insert({})'.format(item))
-        print('heap: {}'.format(heap))
-        print('size: {}'.format(heap.size()))
-        heap_min = heap.get_min()
-        real_min = min(items[: index + 1])
-        correct = heap_min == real_min
-        print('get_min: {}, correct: {}'.format(heap_min, correct))
-
-    print('\nDeleting items:')
-    for item in sorted(items):
-        heap_min = heap.delete_min()
-        print('delete_min: {}'.format(heap_min))
-        print('heap: {}'.format(heap))
-        print('size: {}'.format(heap.size()))
+    heap.heap_sort()
+    # print('heap: {}'.format(heap))
+    #
+    # print('\nInserting items:')
+    # for index, item in enumerate(items):
+    #     heap.insert(item)
+    #     print('insert({})'.format(item))
+    #     print('heap: {}'.format(heap))
+    #     print('size: {}'.format(heap.size()))
+    #     heap_min = heap.get_min()
+    #     real_min = min(items[: index + 1])
+    #     correct = heap_min == real_min
+    #     print('get_min: {}, correct: {}'.format(heap_min, correct))
+    #
+    # print('\nDeleting items:')
+    # for item in sorted(items):
+    #     heap_min = heap.delete_min()
+    #     print('delete_min: {}'.format(heap_min))
+    #     print('heap: {}'.format(heap))
+    #     print('size: {}'.format(heap.size()))
 
 
 if __name__ == '__main__':
